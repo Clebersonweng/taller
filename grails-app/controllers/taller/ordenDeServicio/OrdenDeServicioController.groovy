@@ -69,12 +69,12 @@ class OrdenDeServicioController {
 		[ordenDeServicioInstanceList: OrdenDeServicio.list(params), ordenDeServicioInstanceTotal: OrdenDeServicio.count()]
 	}
 	def cambiarEstado(Integer id){
-		def es = OrdenDeServicio.get(id).estado.id
+		def nuevoEstado = OrdenDeServicio.get(id).estado.id
 
 		def detalless = OrdenDeServicio.get(id)
 				if(detalless.detalles){
 
-		if(es == 1 ){
+		if(nuevoEstado == 1 ){
 			def ess = OrdenDeServicio.get(id).estado
 			ess.executeUpdate("UPDATE FROM OrdenDeServicio SET estado=2 WHERE id=?", [id.toLong()])
 			def estadoID = OrdenDeServicio.get(id)
@@ -126,6 +126,7 @@ class OrdenDeServicioController {
 	def create() {
 		[ordenDeServicioInstance: new OrdenDeServicio(params)]
 	}
+	
 	def numFactura(){
 		def numOrden = OrdenDeServicio.last().numOrden()
 		//fac = FacturaMaestro.last(sort:'numFactura')
@@ -140,9 +141,9 @@ class OrdenDeServicioController {
 		model :[numOrden:numOrden]
 	}
 	def save() {		
-		//guardando la factura de forma estatica
+		//guarda los detalles de forma dinamica devido a los hidden generados via js.
 		def ordenDeServicioInstance = new OrdenDeServicio(params)
-		//println ("este es mi params:"+params)
+		
 
 		if (!ordenDeServicioInstance.save(flush: true)) {
 			render(view: "create", model: [ordenDeServicioInstance: ordenDeServicioInstance])
@@ -186,21 +187,7 @@ class OrdenDeServicioController {
 
 	def update(Long id, Long version) {
 		def ordenDeServicioInstance = OrdenDeServicio.get(id)
-		def hdn = request.getParameter("hdnDetalles");
-		if(!hdn.isEmpty()){
-			List separadoPorFila = []
-			separadoPorFila = hdn.split("#");
-			List<String,Integer> listaDeDetalles = new ArrayList<>();
-			for (String producto : separadoPorFila) {
-				String[] camposLista = producto.split("-");
-				int pid = Integer.parseInt(camposLista[0]);
-				int cant = Integer.parseInt(camposLista[1]);
-				listaDeDetalles.add('repuesto.id':pid,'cantidad':cant);
-			}
-			for (OrdenDeServicioDetalle detalle : listaDeDetalles) {
-				ordenDeServicioInstance.addToDetalles(detalle).save();
-			}
-		}
+		
 		if (!ordenDeServicioInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [
 				message(code: 'ordenDeServicio.label', default: 'OrdenDeServicio'),
