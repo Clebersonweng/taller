@@ -75,8 +75,15 @@
 				</g:each>
 			</tbody>
 		</table>
-		<div class="pagination">
-			<g:paginate total="${marcaInstanceTotal}" />
+		<div class="offset4">
+			<div class="pagination">
+				<ul><li>
+					
+						<g:paginate total="${marcaInstanceTotal}" />
+					
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 

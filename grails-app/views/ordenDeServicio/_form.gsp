@@ -58,14 +58,12 @@
 								code="ordenDeServicio.fecha.label" default="Fecha:" />
 						</label>
 						<div class="controls">
-							<g:datePicker style="MEDIUM" name="fecha" precision="day"
-								type="datetime" value="${ordenDeServicioInstance?.fecha}" />
-
-
+							
+							<g:jqDatePicker name="fecha" class="datepicker" value="${ordenDeServicioInstance.fecha}" /> 
 						</div>
 					</div>
 				</div>
-				<input type="text" id="datepicker"> </p>  
+				
 			</td>
 			<td><div class="control-group">
 					<div
@@ -80,7 +78,7 @@
 									<g:select id="vehiculo" name="vehiculo.id" class="span1"
 										from="${vehiculosList}" optionKey="id" required=""
 										value="${ordenDeServicioInstance?.vehiculo?.id}"
-										class="many-to-one"noSelection="['':'Elige una opcion']" />
+										class="many-to-one" />
 								</div>
 							</g:if>
 							<g:else>
@@ -236,7 +234,7 @@
 <!-- hidden para detalle-->
 
 <div id="divTxt"> 
-<input type="hidden" id="hdnDetalles" name="hdnDetalles" />
+
  <div id="detalhes-container" class="required">
 	<table style="width: 700px; height: 10px"
 		class="table table-bordered table-hover required display" id="tabla">

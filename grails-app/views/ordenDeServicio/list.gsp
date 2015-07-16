@@ -13,11 +13,11 @@
 <g:if test="${session?.user?.role == 'mecanico' }">
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#submenu_create").hide();
+			$("#submenu_create").hide();			
 		});
 	</script>
 </g:if>
-</head>
+	</head>
 <body>
 
 	<div id="list-ordenDeServicio" class="content scaffold-list"
@@ -42,8 +42,7 @@
 				${flash.message}
 			</div>
 		</g:if>
-		<table class="table-condensed table-striped table-hover"
-			style="width: 100%">
+		<table id="tabela"class="table-condensed table-striped table-hover " style="width: 100%">
 			<thead>
 				<tr>
 					<g:sortableColumn property="numOrden"
@@ -80,7 +79,7 @@
 			<tbody id="resultados">
 				<g:each in="${ordenDeServicioInstanceList}" status="i"
 					var="ordenDeServicioInstance">
-					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+					<tr class="${ordenDeServicioInstance.estado.id == 2? 'error' : 'success'} ">
 						<td style="text-align: center">
 							${fieldValue(bean: ordenDeServicioInstance, field: "numOrden")}
 						</td>
@@ -105,7 +104,7 @@
 						<td style="text-align: center">
 							${fieldValue(bean: ordenDeServicioInstance, field: "descripcionTrabajoRealizar")}
 						</td>
-						<td style="text-align: center">
+						<td style="text-align: center" class="estado">
 							${fieldValue(bean: ordenDeServicioInstance, field: "estado")}
 						</td>
 
@@ -129,3 +128,4 @@
 
 </body>
 </html>
+

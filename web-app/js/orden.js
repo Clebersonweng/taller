@@ -57,13 +57,14 @@ $(document)
 											return false;
 										} else {
 											
-											var html = agregarProducto(producto
+											var nuevaFila = agregarProducto(producto
 													.val(), producto.text(),
 													cantidad.val());
+											alert(producto.val());
 
 											// carga los trs en la tabla
 											$("#detalhes-container tbody:first")
-													.append(html);
+													.append(nuevaFila);
 													addFormField(producto.val(),cantidad.val());
 											// resetea los campos despues de
 											// cada add
@@ -103,7 +104,6 @@ $(document)
 							});
 							filas.push('repuesto.id:'+producto +'cantidad:'+ cantidad);
 
-							console.log('repuesto.id:'+producto +'cantidad:'+ cantidad)
 						});
 						var detalles = filas.join('#');
 						//+ "<input type='text' name=detalles["+contador+"].repuesto.id'+ value="idProd"/>"
@@ -111,8 +111,5 @@ $(document)
 					});
 					// cierre de metodo
 					
-					//generando dinamicamente los inputs hiddens
-					var agregarInput = function(idProd, cant) {
-						//return "<input  name=detalles["+contador+"].repuesto.id value="idProd"/>";
-					};
+					
 	});

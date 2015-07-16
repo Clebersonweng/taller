@@ -8,6 +8,7 @@
 <title><g:layoutTitle default="ISP-PROG-WEB" /></title>
 <g:layoutHead />
 <g:javascript library="jquery" plugin="jquery"/>
+<r:require module="jquery-ui"/> 
 <r:require modules="bootstrap"/>
 <r:layoutResources />
 <style type="text/css">

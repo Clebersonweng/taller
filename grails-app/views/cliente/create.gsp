@@ -8,8 +8,10 @@
 	value="${message(code: 'cliente.label', default: 'Cliente')}" />
 <title><g:message code="default.create.label"
 		args="[entityName]" /></title>
+		
 </head>
 <body>
+
 
 	<div id="create-cliente"
 		class="content scaffold-create" role="main">
@@ -30,8 +32,7 @@
 				</g:eachError>
 			</ul>
 		</g:hasErrors>
-		<g:form action="save" class="form-horizontal"
-			>
+		<g:form action="save" class="form-horizontal">
 			<fieldset class="form">
 				<g:render template="form" />
 			</fieldset>
@@ -46,3 +47,4 @@
 	</div>
 </body>
 </html>
+

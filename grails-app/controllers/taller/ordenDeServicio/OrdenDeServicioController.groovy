@@ -69,12 +69,12 @@ class OrdenDeServicioController {
 		[ordenDeServicioInstanceList: OrdenDeServicio.list(params), ordenDeServicioInstanceTotal: OrdenDeServicio.count()]
 	}
 	def cambiarEstado(Integer id){
-		def nuevoEstado = OrdenDeServicio.get(id).estado.id
+		def es = OrdenDeServicio.get(id).estado.id
 
 		def detalless = OrdenDeServicio.get(id)
 				if(detalless.detalles){
 
-		if(nuevoEstado == 1 ){
+		if(es == 1 ){
 			def ess = OrdenDeServicio.get(id).estado
 			ess.executeUpdate("UPDATE FROM OrdenDeServicio SET estado=2 WHERE id=?", [id.toLong()])
 			def estadoID = OrdenDeServicio.get(id)
@@ -120,7 +120,89 @@ class OrdenDeServicioController {
 					redirect(action: "list")
 					flash.message = "No se puede facturar porque el mecanico aun no agrego los detalles"
 				}
-	}
+
+		/**def nuevoEstado = OrdenDeServicio.get(id).estado.id
+
+		def idDeOrden = OrdenDeServicio.get(id)
+
+		//def detalless = OrdenDeServicio.get(id)
+		//		if(detalless.detalles){
+
+		if(nuevoEstado == 1 ){
+			
+			def cambioEstadoOrden = OrdenDeServicio.get(id).estado
+					
+
+
+			cambioEstadoOrden.executeUpdate("UPDATE FROM OrdenDeServicio SET estado=2 WHERE id=?", [id.toLong()])
+			
+
+	
+			
+			// Al cambiar de estado la orden debo generar mi factura creando una nueva factura
+			FacturaMaestro nuevaFactura = new FacturaMaestro()
+				nuevaFactura.cliente = 1
+				nuevaFactura.numFactura = 1313
+				numFactura.fecha = Date.new
+				numFactura.ordenMaestroId = 2
+				numFactura.total = 69999
+				nuevaFactura.validate()
+				if(!nuevaFactura.hasErrors()){
+					nuevaFactura.save(flush:true)
+					}else{
+						// flash.message = message(code: 'default.created.message', args: [message(code: 'nuevaFactura.label', default: 'nuevaFactura'), nuevaFactura.id])
+					}
+				
+			/**def estadoID = OrdenDeServicio.get(id)
+			def clienteID = OrdenDeServicio.get(id).cliente.id
+
+			def date = new Date()
+
+			def fac = FacturaMaestro.last()
+			fac = FacturaMaestro.last(sort:'numFactura')
+			if(fac == null){
+				fac = '1'
+				String string = fac
+				fac = Integer.parseInt(string)
+			}
+			else{
+				String string = fac
+				fac = Integer.parseInt(string)
+				fac = fac + 1
+			}
+
+			int total
+			def detalles = OrdenDeServicio.get(id)
+			for(det in detalles.detalles){
+				int precio = det.repuesto.precioVenta
+				int can = det.cantidad
+				int subtotal = can * precio
+				total = total + subtotal
+			}
+			def idd = OrdenDeServicio.get(id).id
+			def facturaSave = ['ordenMaestroId.id':idd,total:total, fecha: date,'cliente.id':clienteID, numFactura:fac]
+			def facturaInstance = new FacturaMaestro(facturaSave)
+			
+			def testeo = OrdenDeServicio.get(detalles)
+			println ("es un test"+testeo)
+
+			facturaInstance.save(flush:true)
+			
+			
+			redirect(action: "list")
+		}else{
+			redirect(action: "list")
+		}
+		//		}else{
+		//			redirect(action: "list")
+				//<g:if test="${flash.message}">
+					//	<div class="span4">
+							//<div class="alert alert-errors" role="status">
+		//			flash.message = "No se puede facturar porque el mecanico aun no agrego los detalles"
+				//</div>
+
+			//	*/}
+	
 
 
 	def create() {
@@ -140,6 +222,11 @@ class OrdenDeServicioController {
 		
 		model :[numOrden:numOrden]
 	}
+	def traerEstado(){
+		def estadoId = Estado.id(1)
+		println ("mi estado es:"+estadoId)
+		[elEstado: estadoId]
+	} 
 	def save() {		
 		//guarda los detalles de forma dinamica devido a los hidden generados via js.
 		def ordenDeServicioInstance = new OrdenDeServicio(params)

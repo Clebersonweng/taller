@@ -1,8 +1,7 @@
 package taller
 
-class JDatePickerTagLib {
-
- def jqDatePicker = {attrs, body ->
+class JqueryDatePickerTagLib {
+def jqDatePicker = {attrs, body ->
         def out = out
         def name = attrs.name    //The name attribute is required for the tag to work seamlessly with grails
         def id = attrs.id ?: name
@@ -53,6 +52,3 @@ class JDatePickerTagLib {
 
     }
 }
-
-
-

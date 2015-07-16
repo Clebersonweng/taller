@@ -62,6 +62,7 @@ grails.project.dependency.resolution = {
         compile ':cache:1.0.1'
 		compile ":jquery-datatables:1.7.5"
 		runtime ':twitter-bootstrap:2.3.2'
+        compile ":jquery-ui:1.10.4"
 		
     }
 }

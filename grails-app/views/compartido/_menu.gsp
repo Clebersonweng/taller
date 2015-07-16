@@ -23,8 +23,10 @@
 		                            <li><a href="/user/preferences"><i class="icon-cog"></i> Preferences</a></li>
 		                            <li><a href="/help/support"><i class="icon-envelope"></i> Contact Support</a></li>
 		                            <li class="divider"></li>
-		                            <li><a href="../usuario/logout"><i class="icon-off"></i>Logout
-		                             </a> </li>
+		                            
+		                            <li><g:link controller="usuario" action="logout"><i class="icon-off">
+		                            </i> Logout</g:link>
+		                             </li>
 		                        </ul>
 
 		                    </li>
@@ -39,5 +41,10 @@
 		$("#menu_home").addClass("active");
 	}else{	
 		$("#menu_${controllerName}").addClass("active");
+	}
+</g:javascript>
+<g:javascript>
+	if("<span class='currentStep>'"){
+	$(".span.currentStep").addClass("inactive");
 	}
 </g:javascript>
