@@ -42,7 +42,7 @@
 				${flash.message}
 			</div>
 		</g:if>
-		<table id="tabela"class="table-condensed table-striped table-hover " style="width: 100%">
+		<table id="tabela" class="table table-hover" style="width: 100%">
 			<thead>
 				<tr>
 					<g:sortableColumn property="numOrden"
@@ -104,7 +104,7 @@
 						<td style="text-align: center">
 							${fieldValue(bean: ordenDeServicioInstance, field: "descripcionTrabajoRealizar")}
 						</td>
-						<td style="text-align: center" class="estado">
+						<td style="text-align: center">
 							${fieldValue(bean: ordenDeServicioInstance, field: "estado")}
 						</td>
 

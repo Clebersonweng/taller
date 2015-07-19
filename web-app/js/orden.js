@@ -51,20 +51,22 @@ $(document)
 										event.preventDefault();
 										var producto = $("#repuesto option:selected");
 										var cantidad = $("#cantidad");
-										if ($("#repuesto").val() == "") {
+										if ($("#repuesto").val() == "" ) {											
 											return false;
-										} else if (cantidad.val() == "") {								
+										}else if(){
+									            alert('Si existe');
+									    }else{
+									            alert('No existe');
+									    }else if (cantidad.val() == "") {								
 											return false;
 										} else {
 											
-											var nuevaFila = agregarProducto(producto
-													.val(), producto.text(),
+											var nuevaFila = agregarProducto(producto.val(), producto.text(),
 													cantidad.val());
-											alert(producto.val());
+											//);
 
 											// carga los trs en la tabla
-											$("#detalhes-container tbody:first")
-													.append(nuevaFila);
+											$("#detalhes-container tbody:first").append(nuevaFila);
 													addFormField(producto.val(),cantidad.val());
 											// resetea los campos despues de
 											// cada add
@@ -72,15 +74,21 @@ $(document)
 											$("#precio").val("");
 											$("#cantidad").val("");
 										}
+										//realiza la suma  para cada fila para guardar
 										contador++;
 					});
-					//realiza la suma  para cada fila para guardar
+					
 					
 					$("#quitar").live("click", function(event) {
 						event.preventDefault();
 						$(this).parent().parent().remove();
 					});
 
+					// Evento que selecciona la fila y la elimina 
+					//$(document).on("click",".eliminar",function(){
+					//	var parent = $(this).parents().get(0);
+					//	$(parent).remove();
+					//});	
 
 					// aqui voy aguegando los detalles para despues recorrer
 					// todo
